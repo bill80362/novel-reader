@@ -70,6 +70,34 @@ npm run dev
 
 MCP Server 端點由 `laravel/mcp` 提供，供 AI Agent 呼叫以自動建立內容。
 
+### 設定方式
+
+1. 在 `.env` 設定 MCP Bearer Token：
+
+```env
+MCPAPP_SECRET=your-strong-secret-token
+```
+
+2. 將 AI Agent / MCP Client 的 server URL 指向本站的 MCP 端點：
+
+```text
+https://your-domain.com/mcp
+```
+
+3. 在請求標頭加入 Bearer Token：
+
+```http
+Authorization: Bearer your-strong-secret-token
+```
+
+4. 開發環境可直接使用本機網址，例如：
+
+```text
+http://127.0.0.1:8000/mcp
+```
+
+若 token 錯誤或未提供，伺服器會回傳 `401 Unauthorized`。
+
 | 工具 | 說明 |
 |------|------|
 | `list_categories` | 取得所有分類（含 ID） |
