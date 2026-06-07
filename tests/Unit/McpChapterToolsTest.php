@@ -2,8 +2,11 @@
 
 namespace Tests\Unit;
 
+use App\Mcp\Servers\NovelServer;
+use App\Mcp\Tools\CreateChapterTool;
 use App\Models\Chapter;
 use App\Models\Novel;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -11,45 +14,54 @@ class McpChapterToolsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_create_chapter_with_valid_word_count(): void
+    public function test_create_chapter_allows_content_shorter_than_the_previous_minimum(): void
     {
+        $user = User::factory()->create();
         $novel = Novel::factory()->create();
 
-        $content = str_repeat('word ', 1200); // ~6000 characters
-
-        $chapter = Chapter::create([
+        $response = NovelServer::actingAs($user)->tool(CreateChapterTool::class, [
             'novel_id' => $novel->id,
             'chapter_number' => 1,
             'title' => 'Test Chapter',
             'slug' => 'test-chapter',
-            'content' => $content,
-            'word_count' => 6000,
-            'published_at' => now(),
+            'content' => '<p>Short content</p>',
+            'published_at' => now()->toIso8601String(),
         ]);
 
-        $this->assertGreaterThan(0, $chapter->word_count);
-        $this->assertNotNull($chapter->id);
+        $response->assertHasNoErrors()
+            ->assertSee('"created":true');
+
+        $this->assertDatabaseHas(Chapter::class, [
+            'novel_id' => $novel->id,
+            'chapter_number' => 1,
+            'slug' => 'test-chapter',
+        ]);
+
+        $chapter = Chapter::where('novel_id', $novel->id)->where('slug', 'test-chapter')->firstOrFail();
+
+        $this->assertSame(mb_strlen('Short content'), $chapter->word_count);
     }
 
-    public function test_chapter_content_validates_minimum_length(): void
+    public function test_create_chapter_still_rejects_content_over_the_maximum_length(): void
     {
+        $user = User::factory()->create();
         $novel = Novel::factory()->create();
 
-        $content = 'Too short'; // Less than 5000 characters
+        $content = str_repeat('word ', 20000);
 
-        // This should fail validation - but we can test the length check logic
-        $contentLength = mb_strlen(strip_tags($content));
-        $this->assertLessThan(5000, $contentLength);
-    }
+        $response = NovelServer::actingAs($user)->tool(CreateChapterTool::class, [
+            'novel_id' => $novel->id,
+            'chapter_number' => 2,
+            'title' => 'Too Long Chapter',
+            'slug' => 'too-long-chapter',
+            'content' => $content,
+        ]);
 
-    public function test_chapter_content_validates_maximum_length(): void
-    {
-        $novel = Novel::factory()->create();
+        $response->assertHasErrors(['Content too long']);
 
-        $content = str_repeat('word ', 20000); // More than 15000 characters
-
-        // This should fail validation - but we can test the length check logic
-        $contentLength = mb_strlen(strip_tags($content));
-        $this->assertGreaterThan(15000, $contentLength);
+        $this->assertDatabaseMissing(Chapter::class, [
+            'novel_id' => $novel->id,
+            'slug' => 'too-long-chapter',
+        ]);
     }
 }

@@ -14,7 +14,7 @@ class PublishNovelTool extends Tool
 {
     public function handle(Request $request): Response
     {
-        $novelId = $request->input('novel_id');
+        $novelId = $request->get('novel_id');
         if (empty($novelId)) {
             return Response::error('Missing required field: novel_id');
         }

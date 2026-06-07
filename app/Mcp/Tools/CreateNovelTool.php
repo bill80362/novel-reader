@@ -14,7 +14,7 @@ class CreateNovelTool extends Tool
 {
     public function handle(Request $request): Response
     {
-        $data = $request->input();
+        $data = $request->all();
         $required = ['title', 'slug', 'category_id'];
         foreach ($required as $field) {
             if (empty($data[$field])) {

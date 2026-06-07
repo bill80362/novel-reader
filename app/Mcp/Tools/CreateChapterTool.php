@@ -10,12 +10,12 @@ use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Attributes\Description;
 use Laravel\Mcp\Server\Tool;
 
-#[Description('Create a chapter for a novel. IMPORTANT: content must be between 5,000 and 15,000 characters (Chinese characters). word_count is automatically calculated.')]
+#[Description('Create a chapter for a novel. IMPORTANT: content must not exceed 15,000 characters (Chinese characters). word_count is automatically calculated.')]
 class CreateChapterTool extends Tool
 {
     public function handle(Request $request): Response
     {
-        $data = $request->input();
+        $data = $request->all();
         $required = ['novel_id', 'chapter_number', 'title', 'slug', 'content'];
         foreach ($required as $field) {
             if (empty($data[$field])) {
@@ -31,12 +31,6 @@ class CreateChapterTool extends Tool
 
         // Validate content length
         $contentLength = mb_strlen(strip_tags((string) $data['content']));
-        if ($contentLength < 5000) {
-            return Response::error(
-                "Content too short (current: {$contentLength} characters, minimum: 5,000). "
-                .'Please combine with adjacent content or expand this chapter.'
-            );
-        }
         if ($contentLength > 15000) {
             return Response::error(
                 "Content too long (current: {$contentLength} characters, maximum: 15,000). "
