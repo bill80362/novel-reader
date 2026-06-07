@@ -7,6 +7,7 @@ use App\Mcp\Tools\CreateNovelTool;
 use App\Mcp\Tools\GetNovelStatsTool;
 use App\Mcp\Tools\ListCategoriesTool;
 use App\Mcp\Tools\ListTagsTool;
+use App\Mcp\Tools\PublishChapterTool;
 use App\Mcp\Tools\PublishNovelTool;
 use Laravel\Mcp\Server;
 use Laravel\Mcp\Server\Attributes\Instructions;
@@ -23,6 +24,7 @@ class NovelServer extends Server
         ListTagsTool::class,
         CreateNovelTool::class,
         CreateChapterTool::class,
+        PublishChapterTool::class,
         PublishNovelTool::class,
         GetNovelStatsTool::class,
     ];
