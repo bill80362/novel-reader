@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('novel_tag', function (Blueprint $table) {
             $table->unsignedBigInteger('novel_id');
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('novel_id')->references('id')->on('novels')->cascadeOnDelete();
-            $table->foreign('tag_id')->references('id')->on('tags')->cascadeOnDelete();
             $table->primary(['novel_id', 'tag_id']);
         });
     }

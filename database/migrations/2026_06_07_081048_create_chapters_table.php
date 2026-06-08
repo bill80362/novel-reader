@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('novel_id');
-            $table->foreign('novel_id')->references('id')->on('novels')->cascadeOnDelete();
             $table->unsignedInteger('chapter_number');
             $table->string('title');
             $table->string('slug');
