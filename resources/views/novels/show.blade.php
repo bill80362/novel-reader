@@ -78,7 +78,7 @@ if ($novel->cover_image) {
         </div>
         @endif
 
-        <div class="prose dark:prose-invert max-w-none mb-6">
+        <div class="prose prose-invert max-w-none mb-6">
             {!! nl2br(e($novel->description)) !!}
         </div>
 

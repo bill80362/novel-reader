@@ -44,7 +44,7 @@ $schemaData = [
         </div>
     </div>
 
-    <div class="prose dark:prose-invert max-w-none leading-relaxed" :style="{ fontSize: fontSize + 'rem' }">
+    <div class="prose prose-invert max-w-none leading-relaxed" :style="{ fontSize: fontSize + 'rem' }">
         {!! $chapter->content !!}
     </div>
 
