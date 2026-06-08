@@ -19,29 +19,25 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white dark:bg-slate-950" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }">
-    <nav class="bg-white dark:bg-slate-900 border-b">
+<body class="dark bg-slate-950">
+    <nav class="bg-slate-900 border-b">
         <div class="max-w-6xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="{{ route('home') }}" class="text-2xl font-bold">{{ config('app.name') }}</a>
+                <a href="{{ route('home') }}" class="text-2xl font-bold text-white">{{ config('app.name') }}</a>
                 <div class="flex gap-4">
-                    <a href="{{ route('novels.index') }}" class="hover:text-blue-600">小說列表</a>
-                    <a href="{{ route('search') }}" class="hover:text-blue-600">搜尋</a>
-                    <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-xl">
-                        <span x-show="!darkMode">🌙</span>
-                        <span x-show="darkMode">☀️</span>
-                    </button>
+                    <a href="{{ route('novels.index') }}" class="hover:text-blue-400 text-slate-300">小說列表</a>
+                    <a href="{{ route('search') }}" class="hover:text-blue-400 text-slate-300">搜尋</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
+    <main class="max-w-6xl mx-auto px-4 py-8 text-slate-300">
         @yield('content')
     </main>
 
-    <footer class="bg-slate-100 dark:bg-slate-800 mt-16 py-8">
-        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-slate-600 dark:text-slate-400">
+    <footer class="bg-slate-800 mt-16 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-slate-400">
             <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
         </div>
     </footer>
