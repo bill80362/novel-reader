@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('cover_image', 500)->nullable();
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->nullOnDelete();
             $table->enum('status', ['draft', 'published', 'completed'])->default('draft');
             $table->boolean('is_featured')->default(false);
             $table->string('seo_title', 60)->nullable();
