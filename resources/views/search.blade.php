@@ -11,7 +11,7 @@
 
     <form method="GET" action="{{ route('search') }}" class="mb-8">
         <div class="flex gap-2">
-            <input type="text" name="q" value="{{ $query }}" placeholder="搜尋標題或章節..." class="flex-1 px-4 py-2 border rounded dark:bg-slate-800">
+            <input type="text" name="q" value="{{ $query }}" placeholder="搜尋標題或章節..." class="flex-1 px-4 py-2 border rounded dark:bg-slate-800 dark:text-white">
             <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">搜尋</button>
         </div>
     </form>

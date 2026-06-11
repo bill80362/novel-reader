@@ -11,14 +11,14 @@
 
     <div class="flex gap-4 flex-wrap">
         <form method="GET" action="{{ route('novels.index') }}" class="flex gap-2">
-            <select name="category" class="px-3 py-2 border rounded dark:bg-slate-800">
+            <select name="category" class="px-3 py-2 border rounded dark:bg-slate-800 dark:text-white">
                 <option value="">全部分類</option>
                 @foreach(\App\Models\Category::all() as $cat)
                     <option value="{{ $cat->id }}" @selected(request('category') == $cat->id)>{{ $cat->name }}</option>
                 @endforeach
             </select>
 
-            <select name="sort" class="px-3 py-2 border rounded dark:bg-slate-800">
+            <select name="sort" class="px-3 py-2 border rounded dark:bg-slate-800 dark:text-white">
                 <option value="latest" @selected(request('sort', 'latest') === 'latest')>最新更新</option>
                 <option value="popular" @selected(request('sort') === 'popular')>最受歡迎</option>
             </select>
