@@ -33,14 +33,14 @@ $schemaData = [
 <div class="max-w-3xl mx-auto" x-data="{ fontSize: localStorage.getItem('fontSize') || 1 }">
     <x-breadcrumb :items="[['label' => '小說列表', 'url' => route('novels.index')], ['label' => $novel->title, 'url' => route('novels.show', $novel->slug)], ['label' => '第 ' . $chapter->chapter_number . ' 章']]" />
 
-    <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded mb-4 flex justify-between items-center">
+    <div class="bg-slate-100 dark:bg-slate-800 dark:text-white p-4 rounded mb-4 flex justify-between items-center">
         <div>
-            <a href="{{ route('novels.show', $novel->slug) }}" class="text-blue-600 hover:underline">← {{ $novel->title }}</a>
+            <a href="{{ route('novels.show', $novel->slug) }}" class="text-blue-600 dark:text-blue-400 hover:underline">← {{ $novel->title }}</a>
             <h1 class="text-2xl font-bold">第 {{ $chapter->chapter_number }} 章：{{ $chapter->title }}</h1>
         </div>
         <div class="flex gap-2">
-            <button @click="fontSize = Math.max(0.8, fontSize - 0.1); localStorage.setItem('fontSize', fontSize)" class="px-2 py-1 border rounded">A−</button>
-            <button @click="fontSize = Math.min(1.5, fontSize + 0.1); localStorage.setItem('fontSize', fontSize)" class="px-2 py-1 border rounded">A+</button>
+            <button @click="fontSize = Math.max(0.8, fontSize - 0.1); localStorage.setItem('fontSize', fontSize)" class="px-2 py-1 border rounded dark:text-white dark:border-slate-500">A−</button>
+            <button @click="fontSize = Math.min(1.5, fontSize + 0.1); localStorage.setItem('fontSize', fontSize)" class="px-2 py-1 border rounded dark:text-white dark:border-slate-500">A+</button>
         </div>
     </div>
 
