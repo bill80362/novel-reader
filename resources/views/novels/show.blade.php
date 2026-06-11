@@ -45,7 +45,7 @@ if ($novel->cover_image) {
         @if($novel->cover_image)
             <img src="{{ Storage::url($novel->cover_image) }}" alt="{{ $novel->title }}" class="w-full rounded shadow-lg mb-4">
         @else
-            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded aspect-[3/4] flex items-center justify-center mb-4">無封面</div>
+            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded aspect-[3/4] flex items-center justify-center mb-4 dark:text-slate-300">無封面</div>
         @endif
 
         <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded">

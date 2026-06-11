@@ -35,7 +35,7 @@
             @if($novel->cover_image)
                 <img src="{{ Storage::url($novel->cover_image) }}" alt="{{ $novel->title }}" class="w-full h-full object-cover group-hover:scale-105 transition">
             @else
-                <div class="w-full h-full flex items-center justify-center text-slate-400">無封面</div>
+                <div class="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-300">無封面</div>
             @endif
         </div>
         <h3 class="font-semibold truncate group-hover:text-blue-600">{{ $novel->title }}</h3>
