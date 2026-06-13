@@ -124,3 +124,7 @@ php artisan test --compact
 ```bash
 vendor/bin/pint --dirty
 ```
+
+## License
+
+MIT License
