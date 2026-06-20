@@ -6,6 +6,7 @@ use App\Mcp\Tools\CreateChapterTool;
 use App\Mcp\Tools\CreateNovelTool;
 use App\Mcp\Tools\DeleteChapterTool;
 use App\Mcp\Tools\DeleteNovelTool;
+use App\Mcp\Tools\GenerateSitemapTool;
 use App\Mcp\Tools\GetNovelStatsTool;
 use App\Mcp\Tools\ListCategoriesTool;
 use App\Mcp\Tools\ListTagsTool;
@@ -35,6 +36,7 @@ class NovelServer extends Server
         PublishChapterTool::class,
         PublishNovelTool::class,
         GetNovelStatsTool::class,
+        GenerateSitemapTool::class,
     ];
 
     protected array $resources = [
