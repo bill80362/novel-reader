@@ -73,6 +73,11 @@ class NovelController extends Controller
         return view('novels.read', compact('novel', 'chapter', 'nextChapter', 'prevChapter'));
     }
 
+    public function about()
+    {
+        return view('about');
+    }
+
     public function search(Request $request)
     {
         $query = $request->input('q', '');

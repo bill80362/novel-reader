@@ -12,3 +12,5 @@ Route::prefix('novels')->group(function () {
 });
 
 Route::get('/search', [NovelController::class, 'search'])->name('search');
+
+Route::get('/about', [NovelController::class, 'about'])->name('about');
